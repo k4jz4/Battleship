@@ -2,45 +2,81 @@ int leftoffset = 40;
 int topoffset = 20;
 int colwidth = 40;
 int rowheight = colwidth;
+String state;
+int numPlaced = 0;
 
-int[][] spelplan = new int [11][11];
+boolean pressed = false;
 
-int leftoffset1=leftoffset+colwidth*13;
-int topoffset1 = topoffset;
-
-int[][] spelplan1 = new int[11][11];
-
+Board myBoard;
+Board1 myHitBoard;
+Board computerBoard;
+Board1 computerHitBoard;
 
 void setup() {
-  size(1050, 500);
+  size(1050, 900);
 
-  for ( int r = 0; r <= 10; r++) {
-    for (int c = 0; c <= 10; c++) {
-      spelplan[r][c] = 0;
-    }
-  }
-
-  spelplan[3][4] = 1;
+  myBoard = new Board(10, 10);
+  myHitBoard = new Board1(10, 10);
+  computerBoard = new Board(10, 10);
+  computerHitBoard = new Board1(10, 10);
+  state = "setup";
 }
 
 void draw() {
 
+  if (state == "setup") {
 
+    myBoard.render(leftoffset);
+    myHitBoard.render(480);
 
-  for ( int r = 0; r <= 10; r++) {
-    for (int c = 0; c <= 10; c++) {
-      fill(255);
-      rect(leftoffset+r*colwidth, topoffset+c*rowheight, colwidth, rowheight);
+    if (mousePressed && !pressed) {
+      pressed = true;
+      if (mouseX < 440 && mouseX > leftoffset && mouseY < 420 && mouseY > topoffset) {
 
-      rect(leftoffset1+r*colwidth, topoffset1+c*rowheight, colwidth, rowheight);
+        int m = ceil((mouseX-leftoffset)/colwidth);
+        int n = ceil((mouseY-topoffset)/rowheight);
+
+        myBoard.positions[n][m] = 2;
+        numPlaced++;
+        if (numPlaced == 10) {
+          state = "computerSetup";
+        }
+      }
     }
   }
 
-  for ( int r = 0; r <= 10; r++) {
-    for (int c = 0; c <= 10; c++) {
+  if (state == "computerSetup") {
+    pushMatrix();
+    translate(0, 450);
+    computerBoard.render(leftoffset);
+    computerHitBoard.render(480);
 
-      fill(0);
-      text(spelplan[r][c], leftoffset + 20 + c*colwidth, topoffset + 20 + r*rowheight);
+    if (mousePressed && !pressed) {
+      pressed = true;
+      if (mouseX < 440 && mouseX > leftoffset && mouseY < 420 && mouseY > topoffset) {
+
+        int m = ceil((mouseX-leftoffset)/colwidth);
+        int n = ceil((mouseY-topoffset)/rowheight);
+
+        computerBoard.positions[n][m] = 2;
+                print(n);
+                print(" ");
+                println(m);
+        numPlaced++;
+        if (numPlaced == 11) {
+          state = "play";
+        }
+      }
     }
+    popMatrix();
+  }
+
+  if (state == "play") {
+    textSize(128);
+    text("play", 400, 250);
+  }
+
+  if (!mousePressed) {
+    pressed = false;
   }
 }
