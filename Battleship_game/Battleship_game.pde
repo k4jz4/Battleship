@@ -39,6 +39,7 @@ void draw() {
         myBoard.positions[n][m] = 2;
         numPlaced++;
         if (numPlaced == 10) {
+          numPlaced = 0;
           state = "computerSetup";
         }
       }
@@ -53,17 +54,17 @@ void draw() {
 
     if (mousePressed && !pressed) {
       pressed = true;
-      if (mouseX < 440 && mouseX > leftoffset && mouseY < 420 && mouseY > topoffset) {
+      if (mouseX < 440 && mouseX > leftoffset && mouseY < 420 + 450 && mouseY > topoffset + 450) {
 
         int m = ceil((mouseX-leftoffset)/colwidth);
-        int n = ceil((mouseY-topoffset)/rowheight);
+        int n = ceil((mouseY-(topoffset + 450))/rowheight);
 
         computerBoard.positions[n][m] = 2;
                 print(n);
                 print(" ");
                 println(m);
         numPlaced++;
-        if (numPlaced == 11) {
+        if (numPlaced == 10) {
           state = "play";
         }
       }
