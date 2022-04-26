@@ -19,11 +19,12 @@ class Board {
   }
 
   void render(float leftoffset) {
-
     for ( int r = 0; r < numRows; r++) {
-      for (int c = 0; c < numCols; c++) {
-        fill(255);
-        rect(leftoffset+r*colwidth, topoffset+c*rowheight, colwidth, rowheight);
+      for (int c = 0; c < numCols; c++) {          
+
+        // fill(255);
+        // rect(leftoffset+r*colwidth, topoffset+c*rowheight, colwidth, rowheight);
+        image(water, leftoffset+r*colwidth, topoffset+c*rowheight, colwidth, rowheight);
       }
     }
 

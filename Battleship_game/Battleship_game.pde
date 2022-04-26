@@ -5,6 +5,11 @@ int rowheight = colwidth;
 String state;
 int numPlaced = 0;
 
+PImage water;
+PImage miss;
+PImage shipPart;
+PImage hitShipPart;
+
 boolean pressed = false;
 
 Board myBoard;
@@ -14,7 +19,7 @@ Board1 computerHitBoard;
 
 void setup() {
   size(1050, 900);
-
+  water = loadImage("water.png");
   myBoard = new Board(10, 10);
   myHitBoard = new Board1(10, 10);
   computerBoard = new Board(10, 10);
@@ -60,9 +65,9 @@ void draw() {
         int n = ceil((mouseY-(topoffset + 450))/rowheight);
 
         computerBoard.positions[n][m] = 2;
-                print(n);
-                print(" ");
-                println(m);
+        print(n);
+        print(" ");
+        println(m);
         numPlaced++;
         if (numPlaced == 10) {
           state = "play";
