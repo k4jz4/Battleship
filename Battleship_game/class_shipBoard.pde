@@ -1,10 +1,10 @@
-class Board1 {
+class ShipBoard {
 
   int[][] positions;
 
   int numRows, numCols;
 
-  Board1 (int _numRows, int _numCols) {
+  ShipBoard (int _numRows, int _numCols) {
 
     numRows = _numRows;
     numCols = _numCols;
@@ -19,18 +19,16 @@ class Board1 {
   }
 
   void render(float leftoffset) {
-
     for ( int r = 0; r < numRows; r++) {
-      for (int c = 0; c < numCols; c++) {
+      for (int c = 0; c < numCols; c++) {          
+     //   fill(255);
+     //   rect(leftoffset+r*colwidth, topoffset+c*rowheight, colwidth, rowheight);
         image(water, leftoffset+r*colwidth, topoffset+c*rowheight, colwidth, rowheight);
-        // fill(255);
-        // rect(leftoffset+r*colwidth, topoffset+c*rowheight, colwidth, rowheight);
       }
     }
 
     for ( int r = 0; r < numRows; r++) {
       for (int c = 0; c < numCols; c++) {
-
         fill(0);
         text(positions[r][c], leftoffset + 20 + c*colwidth, topoffset + 20 + r*rowheight);
       }

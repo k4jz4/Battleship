@@ -1,10 +1,12 @@
-class Board {
+class HitBoard {
 
+  int x_pos, y_pos;
+  
   int[][] positions;
 
   int numRows, numCols;
 
-  Board (int _numRows, int _numCols) {
+  HitBoard (int _numRows, int _numCols) {
 
     numRows = _numRows;
     numCols = _numCols;
@@ -19,9 +21,9 @@ class Board {
   }
 
   void render(float leftoffset) {
-    for ( int r = 0; r < numRows; r++) {
-      for (int c = 0; c < numCols; c++) {          
 
+    for ( int r = 0; r < numRows; r++) {
+      for (int c = 0; c < numCols; c++) {
         // fill(255);
         // rect(leftoffset+r*colwidth, topoffset+c*rowheight, colwidth, rowheight);
         image(water, leftoffset+r*colwidth, topoffset+c*rowheight, colwidth, rowheight);
@@ -30,6 +32,7 @@ class Board {
 
     for ( int r = 0; r < numRows; r++) {
       for (int c = 0; c < numCols; c++) {
+
         fill(0);
         text(positions[r][c], leftoffset + 20 + c*colwidth, topoffset + 20 + r*rowheight);
       }
