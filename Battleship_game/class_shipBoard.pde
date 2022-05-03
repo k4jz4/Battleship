@@ -1,9 +1,7 @@
 class ShipBoard {
 
   int[][] positions;
-
   int numRows, numCols, x_pos, y_pos;
-  
   int colwidth = 40;
   int rowheight = 40;
 
@@ -22,20 +20,15 @@ class ShipBoard {
       }
     }
   }
-
   void render(float x_pos) {
     for ( int r = 0; r < numRows; r++) {
-      for (int c = 0; c < numCols; c++) {          
-        //   fill(255);
-        //   rect(leftoffset+r*colwidth, topoffset+c*rowheight, colwidth, rowheight);
-        image(water, x_pos+r*colwidth, y_pos+c*rowheight, colwidth, rowheight);
-      }
-    }
-
-    for ( int r = 0; r < numRows; r++) {
       for (int c = 0; c < numCols; c++) {
-        fill(0);
-        text(positions[r][c], x_pos + 20 + c*colwidth, y_pos + 20 + r*rowheight);
+
+        if (positions[c][r] == 0) {
+          image(water, x_pos+r*colwidth, y_pos+c*rowheight, colwidth, rowheight);
+        } else {
+          image(shipPart, x_pos+r*colwidth, y_pos+c*rowheight, colwidth, rowheight);
+        }
       }
     }
   }
@@ -49,8 +42,9 @@ class ShipBoard {
 
         myShipBoard.positions[n][m] = 2;
         numPlaced++;
-        if (numPlaced == 10) {
+        if (numPlaced == 18) {
           numPlaced = 0;
+          state = "play";
         }
       }
     }
