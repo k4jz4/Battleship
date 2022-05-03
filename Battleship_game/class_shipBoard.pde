@@ -2,12 +2,17 @@ class ShipBoard {
 
   int[][] positions;
 
-  int numRows, numCols;
+  int numRows, numCols, x_pos, y_pos;
+  
+  int colwidth = 40;
+  int rowheight = 40;
 
-  ShipBoard (int _numRows, int _numCols) {
+  ShipBoard (int _numRows, int _numCols, int _x_pos, int _y_pos) {
 
     numRows = _numRows;
     numCols = _numCols;
+    x_pos = _x_pos;
+    y_pos = _y_pos;
 
     positions = new int[numRows][numCols];
 
@@ -18,19 +23,35 @@ class ShipBoard {
     }
   }
 
-  void render(float leftoffset) {
+  void render(float x_pos) {
     for ( int r = 0; r < numRows; r++) {
       for (int c = 0; c < numCols; c++) {          
-     //   fill(255);
-     //   rect(leftoffset+r*colwidth, topoffset+c*rowheight, colwidth, rowheight);
-        image(water, leftoffset+r*colwidth, topoffset+c*rowheight, colwidth, rowheight);
+        //   fill(255);
+        //   rect(leftoffset+r*colwidth, topoffset+c*rowheight, colwidth, rowheight);
+        image(water, x_pos+r*colwidth, y_pos+c*rowheight, colwidth, rowheight);
       }
     }
 
     for ( int r = 0; r < numRows; r++) {
       for (int c = 0; c < numCols; c++) {
         fill(0);
-        text(positions[r][c], leftoffset + 20 + c*colwidth, topoffset + 20 + r*rowheight);
+        text(positions[r][c], x_pos + 20 + c*colwidth, y_pos + 20 + r*rowheight);
+      }
+    }
+  }
+  void mouse() {
+    if (mousePressed && !pressed) {
+      pressed = true;
+      if (mouseX < (x_pos + numCols*colwidth) && mouseX > x_pos && mouseY < (y_pos + numRows*rowheight) && mouseY > y_pos) {
+
+        int m = ceil((mouseX-x_pos)/colwidth);
+        int n = ceil((mouseY-y_pos)/rowheight);
+
+        myShipBoard.positions[n][m] = 2;
+        numPlaced++;
+        if (numPlaced == 10) {
+          numPlaced = 0;
+        }
       }
     }
   }
