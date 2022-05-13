@@ -26,9 +26,15 @@ class ShipBoard {
 
         if (positions[c][r] == 0) {
           image(water, x_pos+r*colwidth, y_pos+c*rowheight, colwidth, rowheight);
-        } else {
-          image(shipPart, x_pos+r*colwidth, y_pos+c*rowheight, colwidth, rowheight);
+        } else if (positions[c][r] == 2) {
+          image(shipPart, x_pos+c*colwidth, y_pos+r*rowheight, colwidth, rowheight);
+        } else if (positions[c][r] == 3) {
+          image(hitShipPart, x_pos+c*colwidth, y_pos+r*rowheight, colwidth, rowheight);
+        } else if (positions[c][r] == 4) {
+          image(miss, x_pos+c*colwidth, y_pos+r*rowheight, colwidth, rowheight);
         }
+        textSize(10);
+        text(positions[c][r], x_pos + 20 + c*colwidth, y_pos + 20 + r*rowheight);
       }
     }
   }
