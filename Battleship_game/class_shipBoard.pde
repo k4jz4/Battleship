@@ -42,9 +42,9 @@ class ShipBoard {
 
         myShipBoard.positions[n][m] = 2;
         numPlaced++;
-        if (numPlaced == 18) {
+        if (numPlaced == 10) {
           numPlaced = 0;
-          state = "play";
+          state = "enemyTurn";
         }
       }
     }
