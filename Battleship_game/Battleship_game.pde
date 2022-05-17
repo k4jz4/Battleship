@@ -21,58 +21,71 @@ void setup() {
   hitShipPart = loadImage("hitShipPart.png");
   miss = loadImage("miss.png");
   myShipBoard = new ShipBoard(10, 10, 40, 20);
-  myHitBoard = new HitBoard(10, 10, 200, 20);
+  myHitBoard = new HitBoard(10, 10, 500, 20);
   myNetworking = new Networking();
   state = "setup";
 }
 
 void draw() {
-  background(0);
+  background(200);
 
+  //***********STATE SETUP**************
   if (state == "setup") {
 
     myShipBoard.mouse();
   }
 
+
+  //************STATE ENEMYTURN**********
   if (state == "enemyTurn") {
 
     read = myNetworking.read();
 
     if (read != "0") {
-      // Utför fiendens drag
 
-      //tar reda på vart enemy har gjort något(den informationen finns i read)->
       comPos = read.indexOf(",");
       String rStr = read.substring(0, comPos);
       String cStr = read.substring(comPos+1);
       int r = int(rStr);
       int c = int(cStr);
 
-      //  if (myShipBoard.positions[r][c] == 2) {
-      myShipBoard.positions[c][r] = 3;
-      //  } else {
-      //    myShipBoard.positions[x][y] = 4;
-      //  }    
+      if (myShipBoard.positions[r][c] == 1) {
+        myShipBoard.positions[c][r] = 2;
+      } else if (myShipBoard.positions[r][c] == 0) {     
+        myShipBoard.positions[c][r] = 3;
+      }    
       //TEST
       println(r);
       println(c);
-
-      //Vad som sen ska hända på positionen som enemy har gjort något beror på träff eller miss
 
       state = "myTurn";
     }
   }
 
+  //********STATE MYTURN***********
   if (state == "myTurn") {
     textSize(128);
     text("myTurn", 350, 250);
     // utför mitt drag
   }
 
-  myShipBoard.render(40);
-  myHitBoard.render(480);
+
+  //*******ALL STATES************
+  myShipBoard.render();
+  myHitBoard.render();
 
   if (!mousePressed) {
     pressed = false;
+  }
+}
+
+void keyPressed() {
+  for ( int c = 0; c < 4; c++) {
+
+    for (int r = 0; r < 4; r++) {
+      print(c);
+      print(r);
+      println(myShipBoard.positions[c][r]);
+    }
   }
 }

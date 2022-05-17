@@ -21,7 +21,7 @@ class HitBoard {
     }
   }
 
-  void render(float x_pos) {
+  void render() {
     for ( int r = 0; r < numRows; r++) {
       for (int c = 0; c < numCols; c++) {          
         image(water, x_pos+r*colwidth, y_pos+c*rowheight, colwidth, rowheight);
@@ -42,9 +42,9 @@ class HitBoard {
         int m = ceil((mouseX-x_pos)/colwidth);
         int n = ceil((mouseY-y_pos)/rowheight);
 
-        myShipBoard.positions[n][m] = 2;
+        myShipBoard.positions[n][m] = 1;
         numPlaced++;
-        if (numPlaced == 18) {
+        if (numPlaced == 10) {
           numPlaced = 0;
         }
       }
