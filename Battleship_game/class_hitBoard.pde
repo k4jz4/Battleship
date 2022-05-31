@@ -42,9 +42,9 @@ class HitBoard {
         int m = ceil((mouseX-x_pos)/colwidth);
         int n = ceil((mouseY-y_pos)/rowheight);
 
-        myShipBoard.positions[n][m] = 1;
+        myHitBoard.positions[n][m] = 1;
         numPlaced++;
-        if (numPlaced == 10) {
+        if (numPlaced == 1) {
           numPlaced = 0;
         }
       }

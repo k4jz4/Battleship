@@ -12,36 +12,34 @@ class ShipBoard {
     x_pos = _x_pos;
     y_pos = _y_pos;
 
-    positions = new int[numRows][numCols];
+    positions = new int[numCols][numRows];
 
-    for ( int r = 0; r < numRows; r++) {
-      for (int c = 0; c < numCols; c++) {
-        positions[r][c] = 0;
+    for ( int c = 0; c < numCols; c++) {
+      for (int r = 0; r < numRows; r++) {
+        positions[c][r] = 0;
       }
     }
   }
 
 
   void render() {
-    //for ( int r = 0; r < numRows; r++) {    
-    //  for (int c = 0; c < numCols; c++) {
+    for ( int c = 0; c < numCols; c++) {    
+      for (int r = 0; r < numRows; r++) {
 
-    //    if (positions[c][r] == 0) {
-    //      image(water, x_pos+r*colwidth, y_pos+c*rowheight, colwidth, rowheight);
-    //    } else if (positions[c][r] == 1) {
-    //      image(shipPart, x_pos+c*colwidth, y_pos+r*rowheight, colwidth, rowheight);
-    //    } else if (positions[c][r] == 2) {
-    //      image(hitShipPart, x_pos+c*colwidth, y_pos+r*rowheight, colwidth, rowheight);
-    //    } else if (positions[c][r] == 3) {
-    //      image(miss, x_pos+c*colwidth, y_pos+r*rowheight, colwidth, rowheight);
-    //    } else {
-    //      image(water, x_pos+r*colwidth, y_pos+c*rowheight, colwidth, rowheight);
-    //    }
-    //  }
-    //}
+        if (positions[c][r] == 0) {
+          image(water, x_pos+r*colwidth, y_pos+c*rowheight, colwidth, rowheight);
+        } else if (positions[c][r] == 1) {
+          image(shipPart, x_pos+c*colwidth, y_pos+r*rowheight, colwidth, rowheight);
+        } else if (positions[c][r] == 2) {
+          image(hitShipPart, x_pos+c*colwidth, y_pos+r*rowheight, colwidth, rowheight);
+        } else if (positions[c][r] == 3) {
+          image(miss, x_pos+c*colwidth, y_pos+r*rowheight, colwidth, rowheight);
+        }
+      }
+    }
     
-    for ( int r = 0; r < numRows; r++) {
-      for (int c = 0; c < numCols; c++) {
+    for ( int c = 0; c < numCols; c++) {
+      for (int r = 0; r < numRows; r++) {
         textSize(10);
         text(positions[c][r], x_pos + 20 + c*colwidth, y_pos + 20 + r*rowheight);
       }

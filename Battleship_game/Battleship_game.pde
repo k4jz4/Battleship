@@ -11,7 +11,6 @@ boolean pressed = false;
 ShipBoard myShipBoard;
 HitBoard myHitBoard;
 Networking myNetworking;
-
 String read;
 
 void setup() {
@@ -59,6 +58,7 @@ void draw() {
       println(c);
 
       state = "myTurn";
+     
     }
   }
 
@@ -66,9 +66,15 @@ void draw() {
   if (state == "myTurn") {
     textSize(128);
     text("myTurn", 350, 250);
+
+    if (myHitBoard.positions[r][c] == 1) {
+        myHitBoard.positions[c][r] = 2;
+      } else if (myHitBoard.positions[r][c] == 0) {     
+        myHitBoard.positions[c][r] = 3;
+
+    // 6+","+7;
     // utför mitt drag
   }
-
 
   //*******ALL STATES************
   myShipBoard.render();
@@ -81,7 +87,6 @@ void draw() {
 
 void keyPressed() {
   for ( int c = 0; c < 4; c++) {
-
     for (int r = 0; r < 4; r++) {
       print(c);
       print(r);
